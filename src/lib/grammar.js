@@ -155,7 +155,7 @@ function getSortedKeys(arr) {
 }
 
 function buildRegex(matchersParams, matchersNoParams) {
-    matchersParams = matchersParams ? '(?<atomicSelector>' + matchersParams + ')\\((?<atomicValues>' + GRAMMAR.VALUES + ')\\)' : '';
+    matchersParams = matchersParams ? '(?<atomicSelector>' + matchersParams + ')\\_(?<atomicValues>' + GRAMMAR.VALUES + ')' : '';
     matchersNoParams = matchersNoParams ? '(?<selector>' + matchersNoParams + ')' : '';
     return '(?:' + [matchersParams, matchersNoParams].join('|') + ')';
 }
