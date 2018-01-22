@@ -382,6 +382,58 @@ Atomizer.prototype.parseConfig = function (config/*:AtomizerConfig*/, options/*:
             }
         }
 
+
+
+
+
+        // iterate rules so we can replace selectors with their valid form
+        // console.log(rule.rules);
+        // console.log(rule.rules);
+        // var newRules = rule.rules;
+        // console.log(newRules);
+
+
+        // console.log("--original--");
+        // console.log(rule.rules);
+
+        if (rule.rules) {
+            Object.keys(rule.rules).forEach(function (thing) {
+
+
+
+                var newSelector = thing.replace('$selector', "[" + treeo.className + "]");
+                // console.log(rule.rules[thing]);
+                // console.log(rule.rules[newSelector]);
+                // delete rule.rules[thing];
+                // console.log("--between--");
+                // console.log(thing);
+                // console.log("--other--");
+                // console.log(rule.rules[thing]);
+                // console.log("--newSelector--");
+                // console.log(rule.rules[thing]);
+                var anotherthing = rule.rules[thing];
+
+                delete rule.rules[thing];
+
+                rule.rules[newSelector] = anotherthing;
+
+
+
+            });
+        }
+
+
+
+
+        // console.log(rule.rules);
+
+
+
+
+
+
+
+
         tree[rule.matcher].push(treeo);
     }, this);
 
@@ -502,7 +554,7 @@ Atomizer.prototype.getCss = function (config/*:AtomizerConfig*/, options/*:CSSOp
                 }
 
                 // add the dot for the class
-                selector = ['.', selector].join('');
+                selector = ['[', selector, ']'].join('')
 
                 // add the namespace only if we don't have a parent selector
                 if (!treeo.parent) {
